@@ -3,7 +3,7 @@ Howdy, welcome to the extra credit. Looks a lot like the final...Let's get start
 Lexeme Table
     token_code. token -> symbol
     1. real_literal -> {0-9}\*.{0-9}\*
-    2. natural_literal -> {0-9}\*
+    2. int_literal -> {0-9}\*
     3. bool_literal -> True | False
     4. char_literal -> '{a-zA-Z,.\'\";:\\!@#%^&*()_-=+`~<>?/\t\n\f\b}'
     5. string_literal -> "{a-zA-Z,.\'\";:\\!@#%^&*()_-=+`~<>?/\t\n\f\b}\*"
