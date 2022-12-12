@@ -1,0 +1,5 @@
+{
+    var hi = "hi"
+    var x = 1
+    var y = 2 + 1
+}
