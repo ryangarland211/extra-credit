@@ -1,0 +1,13 @@
+//fail
+VOID MAIN ( ) {
+    public class bro {
+        bro = 9 ;
+    }
+    method int IDK( ) {
+        x = 7 ;
+        y = 3 ;
+        z = x + y ;
+        z = 10 ;
+        return z ;
+    }
+}
