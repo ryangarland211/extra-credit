@@ -1,6 +1,6 @@
 Howdy, welcome to the extra credit. Looks a lot like the final...Let's get started.
 
-Lexeme Table
+Token Table
     token_code. token -> symbol
     1. real_literal -> {0-9}\*.{0-9}\*
     2. int_literal -> {0-9}\*
@@ -55,7 +55,7 @@ Syntax Table:
     <expr> --> <term> {(`+`|`-`)<term>}
     <term> --> <val>{(`*`|`/`|`%`|`\*\*`)<val>}
     <val> --> <id> | <real_literal> | <integer_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)`
-    <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> | `(` <bool_stmt> `)` | `!` <bool_stmt> | <bool_stmt> (`&&`|`||`) <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`|`&&`|`||`) <expr>
+    <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> 
     <empty> --> ``
 
 Semantic Table:
