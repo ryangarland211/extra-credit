@@ -57,3 +57,102 @@ Syntax Table:
     <val> --> <id> | <real_literal> | <integer_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)`
     <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`) <expr> | `(` <bool_stmt> `)` | `!` <bool_stmt> | <bool_stmt> (`&&`|`||`) <bool_stmt> --> `True` | `False` | <expr> (`==`|`!==`|`<`|`>`|`<==`|`>==`|`&&`|`||`) <expr>
     <empty> --> ``
+
+Semantic Table:
+    String + String does concatenation
+a.  Syntax: <expr> --> <term[1]> + <term[2]>
+    Semantics: <expr>.expected_type <- <term[1]>.actual_type + <term[2]>.actual_type
+                <term[1]>.expected_type <- <val[1]>.actual_type
+                <term[2]>.expected_type <- <val[2]>.actual_type
+                if (<val[1]>.actual_type == string_literal) && (<val[2]>.actual_type == string_literal)
+                    then strings are concatenated
+                else 
+                    <id> | <real_literal> | <integer_literal> | <bool_literal> | <char_literal>
+
+String * Natural repeats the integer number of times if greater than 0
+b. Syntax: <expr> --> <term>  = <val[1]> * <val[2]>
+    Semantics: <expr>.expected_type <- <term>.actual_type  <- <val[1]>.actual_type * <val[2]>.actual_type
+                if (<val[1]>.actual_type == string) && (<val[2]>.actual_type == integer_literal)
+                    then 
+                    <var[3]> = string_literal <var[1]> is repeated <var[2]> times
+                    return <var3>
+                else 
+                    <id> | <real_literal> | <bool_literal> | <char_literal>
+
+Assign bool to natural is allowed
+c. Syntax: <assignment> --> var <id> = <expr>
+    Semantics: <expr>.expected_type <- <id>.actual_type
+                if (<expr>.actual_type == bool_literal) && (<id>.actual_type == integer_literal)
+                    then 
+                    <id> = 1 if <expr> is true
+                    <id> = 0 if <expr> is false
+                else 
+                    <id> | <real_literal> | <bool_literal> | <char_literal>
+
+Assign bool to natural is allowed
+d. Syntax: <assignment> --> var <id> = <expr>
+    Semantics: <expr>.expected_type <- <id>.actual_type
+                if (<expr>.actual_type == integer_literal) && (<id>.actual_type == bool_literal )
+                    then 
+                    <id> = true if <expr> is 1
+                    <id> = false if <expr> is 0
+                else 
+                    <id> | <real_literal> | <string_literal> | <char_literal>
+Assign char to natural is allowed
+e. Syntax: <assignment> --> var <id> = <expr>
+    Semantics: <expr>.expected_type <- <id>.actual_type
+                if (<expr>.actual_type == char_literal) && (<id>.actual_type == integer_literal)
+                    then 
+                    <id> = ASCII value of <expr>
+                else 
+                    <id> | <real_literal> | <string_literal> | <bool_literal>
+Assign natural to char is allowed
+f. Syntax: <assignment> --> var <id> = <expr>
+    Semantics: <expr>.expected_type <- <id>.actual_type
+                if (<expr>.actual_type == integer_literal) && (<id>.actual_type == char_literal)
+                    then 
+                    <id> = ASCII character of <expr>
+                else 
+                    <id> | <real_literal> | <string_literal> | <bool_literal>
+Assign natural to real is allowed
+g. Syntax: <assignment> --> var <id> = <expr>
+    Semantics: <expr>.expected_type <- <id>.actual_type
+                if (<expr>.actual_type == integer_literal) && (<id>.actual_type == real_literal)
+                    then 
+                    <id> = <expr>
+                else 
+                    <id>  | <string_literal> | <bool_literal>
+No other types are allowed to be assigned to others outside of their own
+h. Syntax: <assignment> --> var <id> = <expr>
+    Semantics: <expr>.expected_type <- <id>.actual_type
+                if (<expr>.actual_type == <id>.actual_type)
+                    then 
+                    <id> = <expr>
+                else 
+                    error
+Dividing by zero is an error
+i. Syntax: <expr> --> <term[1]> / <term[2]>
+    Semantics: <expr>.expected_type <- <term[1]>.actual_type / <term[2]>.actual_type
+                <term[1]>.expected_type <- <val[1]>.actual_type
+                <term[2]>.expected_type <- <val[2]>.actual_type
+                if (<val[1]>.actual_type == real_literal) && (<val[2]>.actual_type == real_literal)
+                    then 
+                    if <val[2]> == 0
+                        then error
+                    else
+                        <id> | <real_literal> | <integer_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+                else 
+                    <id> | <real_literal> | <integer_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+Modulo operating by zero is an error
+j. Syntax: <expr> --> <term[1]> % <term[2]>
+    Semantics: <expr>.expected_type <- <term[1]>.actual_type % <term[2]>.actual_type
+                <term[1]>.expected_type <- <val[1]>.actual_type
+                <term[2]>.expected_type <- <val[2]>.actual_type
+                if (<val[1]>.actual_type == real_literal) && (<val[2]>.actual_type == real_literal)
+                    then 
+                    if <val[2]> == 0
+                        then error
+                    else
+                        <id> | <real_literal> | <integer_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
+                else 
+                    <id> | <real_literal> | <integer_literal> | <bool_literal> | <char_literal> | <string_literal> | `(` <expr> `)
